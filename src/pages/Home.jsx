@@ -34,6 +34,7 @@ import logo10 from "../assets/clientlogo/Schneider.png";
 import logo11 from "../assets/clientlogo/touch.png";
 import ServicesSection from "./ServicesSection";
 import MepCalculation from "./MepCalculation";
+import TestimonialsSection from "./TestimonialsSection";
 
 const Home = () => {
   const [activeTestimonial, setActiveTestimonial] = useState(0);
@@ -62,55 +63,6 @@ const Home = () => {
 
     return count;
   };
-
-  const services = [
-    {
-      icon: <Zap className="w-8 h-8 text-yellow-500" />,
-      title: "Electrical Engineering",
-      description:
-        "Installation of electrical systems, power distribution, and lightning protection systems.",
-      features: [
-        "Low Voltage Systems",
-        "Power Distribution",
-        "Lightning Protection",
-      ],
-    },
-    {
-      icon: <Bolt className="w-8 h-8 text-yellow-500" />,
-      title: "Mechanical Engineering",
-      description:
-        "HVAC systems, lifts, and firefighting systems installed by our expert engineers.",
-      features: ["HVAC Design", "Fire Fighting Systems", "Ventilation"],
-    },
-    {
-      icon: <Droplet className="w-8 h-8 text-yellow-500" />,
-      title: "Plumbing Services",
-      description:
-        "Comprehensive plumbing design, installation, and maintenance services.",
-      features: ["Water Distribution", "Drainage Systems", "Solar Heaters"],
-    },
-    {
-      icon: <Monitor className="w-8 h-8 text-yellow-500" />,
-      title: "IT & Low Current",
-      description:
-        "Network design, security camera installation, and server room setup.",
-      features: ["CCTV Systems", "Access Control", "Data Networks"],
-    },
-    {
-      icon: <Leaf className="w-8 h-8 text-yellow-500" />,
-      title: "Green Building",
-      description:
-        "Energy audits, certification, and sustainable building consultancy.",
-      features: ["Energy Audits", "LEED Consulting", "RwGBO Certification"],
-    },
-    {
-      icon: <Building className="w-8 h-8 text-yellow-500" />,
-      title: "MEP Design",
-      description:
-        "Professional MEP design services for all types of buildings and facilities.",
-      features: ["3D Modeling", "BIM Services", "Design Review"],
-    },
-  ];
 
   const projects = [
     {
@@ -147,29 +99,7 @@ const Home = () => {
     },
   ];
 
-  const testimonials = [
-    {
-      name: "Zandré du Plessis",
-      role: "Project Manager",
-      company: "TouchDown Africa",
-      text: "Their unparalleled engineering expertise and dedication to excellence have earned our complete trust.",
-      rating: 5,
-    },
-    {
-      name: "KABANDA Pierre Celestin",
-      role: "Managing Director",
-      company: "IMCE LTD",
-      text: "Their unwavering dedication and exceptional timeliness has been invaluable in ensuring project success.",
-      rating: 5,
-    },
-    {
-      name: "Eng. Paul KAYIJAHE",
-      role: "Estate Manager",
-      company: "MAGERWA",
-      text: "They consistently met deadlines and handled every aspect with remarkable competence and efficiency.",
-      rating: 5,
-    },
-  ];
+  
 
   const heroSlides = [
     {
@@ -213,13 +143,7 @@ const Home = () => {
     return () => clearInterval(timer);
   }, []);
 
-  // Auto-rotate testimonials
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setActiveTestimonial((prev) => (prev + 1) % testimonials.length);
-    }, 4000);
-    return () => clearInterval(timer);
-  }, []);
+  
 
   return (
     <div className="min-h-screen overflow-x-hidden">
@@ -354,14 +278,13 @@ const Home = () => {
             <h2 className="text-xl font-semibold text-yellow-500 mb-2">
               Mission & Vision
             </h2>
-            <div className="w-20 h-1 bg-gradient-to-r from-yellow-400 to-blue-400 mx-auto rounded-full"></div>
-            
-            <p className="text-gray-600 max-w-3xl mx-auto text-sm">
-              Building excellence with integrity, innovation, and precision. We are
-committed to delivering high-quality construction solutions that exceed
-expectations, ensuring safety, sustainability, and lasting value.
+           
+            <p className="text-gray-600 max-w-3xl mx-auto text-sm mb-4">
+              Building excellence with integrity, innovation, and precision. We
+              are committed to delivering high-quality construction solutions
+              that exceed expectations, ensuring safety, sustainability, and
+              lasting value.
             </p>
-            
           </div>
 
           {/* Mission and Vision Grid */}
@@ -521,95 +444,7 @@ expectations, ensuring safety, sustainability, and lasting value.
       </section>
 
       {/* Modern Testimonials Slider */}
-      <section className="py-8 bg-gradient-to-r from-blue-500 to-blue-900 text-white">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6">
-        <div className="text-center mb-12">
-          
-          <h2 className="text-2xl md:text-2xl font-semibold mb-2">
-           What our client says about us!
-          </h2>
-           <div className="w-20 h-1 bg-gradient-to-r from-yellow-400 to-blue-400 mx-auto rounded-full"></div>
-           <p className="text-white max-w-3xl mx-auto text-xl">
-              Customer satisfaction is not just a goal;
-it’s the foundation of our success.
-            </p>
-        </div>
-        
-        <div className="relative">
-          <div className="overflow-hidden">
-            <div
-              className="flex transition-transform duration-500"
-              style={{
-                transform: `translateX(-${activeTestimonial * 100}%)`,
-              }}
-            >
-              {testimonials.map((testimonial, index) => (
-                <div key={index} className="w-full flex-shrink-0 px-4">
-                  <div className="max-w-2xl mx-auto text-center">
-                    <div className="flex justify-center mb-4">
-                      {[...Array(testimonial.rating)].map((_, i) => (
-                        <Star
-                          key={i}
-                          className="w-5 h-5 text-yellow-400 fill-current"
-                        />
-                      ))}
-                    </div>
-                    
-                    <p className="text-xl text-blue-100 mb-6 italic">
-                      "{testimonial.text}"
-                    </p>
-                    
-                    <div>
-                      <div className="text-lg font-semibold">
-                        {testimonial.name}
-                      </div>
-                      <div className="text-sm text-blue-300">
-                        {testimonial.role}
-                      </div>
-                      <div className="text-sm text-yellow-400">
-                        {testimonial.company}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-          
-         
-          
-          <div className="absolute inset-y-0 right-0 flex items-center">
-            <button 
-              onClick={() => setActiveTestimonial(prev => 
-                prev === testimonials.length - 1 ? 0 : prev + 1
-              )}
-              className="bg-white/10 hover:bg-white/20 rounded-full p-2 mr-4 backdrop-blur-sm transition-all duration-200"
-              aria-label="Next testimonial"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
-          </div>
-
-          {/* Dots Indicator */}
-          <div className="flex justify-center gap-2 mt-8">
-            {testimonials.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setActiveTestimonial(index)}
-                className={`w-2 h-2 rounded-full transition-all ${
-                  index === activeTestimonial
-                    ? "w-8 bg-yellow-400"
-                    : "bg-white/30"
-                }`}
-                aria-label={`Go to testimonial ${index + 1}`}
-              />
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
+      <TestimonialsSection />
 
       <section className="py-12 bg-gray-50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -634,8 +469,8 @@ it’s the foundation of our success.
               Trusted by Industry Leaders
             </h2>
             <p className="text-gray-600 mt-2 text-sm max-w-md mx-auto">
-              Our partners help us innovate, grow, and deliver
-exceptional results.
+              Our partners help us innovate, grow, and deliver exceptional
+              results.
             </p>
           </div>
 

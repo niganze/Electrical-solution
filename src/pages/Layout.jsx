@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import DownloadProfile from '../components/DownloadProfile';
+// import DownloadProfile from '../components/DownloadProfile';
 
 function Layout() {
   return (
@@ -9,7 +9,7 @@ function Layout() {
       <Navbar />
       
       {/* Download Profile Button - visible on all pages */}
-      <DownloadProfile />
+      {/* <DownloadProfile /> */}
       
       {/* Main content container */}
       <main className="flex-grow">

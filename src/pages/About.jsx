@@ -1,9 +1,12 @@
 import React from 'react';
 import { BarChart3, Users, Calendar, Award, Shield, Wrench, CheckCircle, Clock, ChevronRight } from 'lucide-react';
 import AboutUsImage from '../assets/images/about.jpg';
-import person from '../assets/images/person.jpg';
+
+import TeamMembers from './TeamMembers';
 
 export default function About() {
+
+  
   // Timeline data for company journey
   const journeyTimeline = [
     {
@@ -48,36 +51,7 @@ export default function About() {
     }
   ];
 
-  // Team members data
-  const teamMembers = [
-    {
-      name: "Eng. Caleb BYIRINGIRO",
-      position: "Managing Director",
-      image: person,
-      description: "Founder of ELECTRICAL SOLUTION COMPANY. Member of Institute of Engineers in Rwanda(IER), RURA, and certified by IEEE. Professional Engineer with a degree in electrical engineering from the University of Rwanda."
-    },
-    {
-      name: "Eng. Thacien NSABIMANA",
-      position: "Operations Manager",
-      image: person,
-      quote: "Alone we can do so little; together we can do so much.",
-      description: "Operations Manager since 2023. Holds a bachelor's degree in Electrical Engineering from the University of Rwanda. Dedicated professional who grew with the company since its early days."
-    },
-    {
-      name: "Dr. Jean De Pierre NAMAHORO",
-      position: "DAF",
-      image: person,
-      quote: "No one can change a person, but someone can be a person's reason to change.",
-      description: "DAF since 2020 with extensive experience in Finance. Previously worked as a researcher in Finance. Holds Doctorate Degree in Finance from China University of Geosciences."
-    },
-    {
-      name: "Eng. Diane UWIMANA",
-      position: "MEP Engineer",
-      image: person,
-      quote: "We understand that customers do not know how much we know until they know how much we care.",
-      description: "Passionate about solving complex problems and contributing to efficient, sustainable systems. Values respect, collaboration, and technical expertise."
-    }
-  ];
+  
 
   // Company values
   const values = [
@@ -186,6 +160,7 @@ export default function About() {
           </div>
           <div className="md:w-1/2">
             <h2 className="text-2xl font-bold text-blue-900 mb-4">Who We Are</h2>
+            
             <p className="text-gray-700 mb-3 text-sm leading-relaxed">
               Electrical Solution Company is a leading provider of engineering services specializing in Mechanical, 
               Electrical, and Plumbing (MEP) systems since 2016. We leverage our expertise to design, engineer, 
@@ -236,6 +211,7 @@ export default function About() {
         <div className="max-w-6xl mx-auto px-6 md:px-12">
           <div className="text-center mb-10">
             <h2 className="text-2xl font-bold text-blue-900 mb-3">Our Mission & Vision</h2>
+            <div className="w-20 h-1 bg-gradient-to-r from-yellow-400 to-blue-400 mx-auto rounded-full"></div>
             <p className="text-base text-gray-600 max-w-3xl mx-auto">
               Building excellence with integrity, innovation, and precision. We are committed to delivering high-quality 
               construction solutions that exceed expectations, ensuring safety, sustainability, and lasting value.
@@ -277,6 +253,7 @@ export default function About() {
       <div className="max-w-6xl mx-auto px-6 md:px-12 py-12 lg:py-16">
         <div className="text-center mb-10">
           <h2 className="text-2xl font-bold text-blue-900 mb-3">Our Core Values</h2>
+          <div className="w-20 h-1 bg-gradient-to-r from-yellow-400 to-blue-400 mx-auto rounded-full"></div>
           <p className="text-base text-gray-600 max-w-3xl mx-auto">
             Our success stems from a deep commitment to providing engineering solutions 
             that are tailored to meet our clients' unique needs.
@@ -302,6 +279,7 @@ export default function About() {
           <div className="flex flex-col md:flex-row gap-10 items-center">
             <div className="md:w-1/2">
               <h2 className="text-2xl font-bold text-blue-900 mb-4">What We Do</h2>
+             
               <p className="text-gray-700 mb-5 text-sm leading-relaxed">
                 We connect expertise in Mechanical, Electrical and Plumbing works, to engineer, design, 
                 supervise and install MEP systems that bring buildings to life and create a delightful 
@@ -338,44 +316,14 @@ export default function About() {
       </div>
 
       {/* Team */}
-      <div id="team" className="max-w-6xl mx-auto px-6 md:px-12 py-12 lg:py-16">
-        <div className="text-center mb-10">
-          <h2 className="text-2xl font-bold text-blue-900 mb-3">Our Team</h2>
-          <p className="text-base text-gray-600 max-w-3xl mx-auto">
-            This company is built on a foundation of integrity, excellence, and a commitment to serving others. 
-            We have a very experienced team including professional Engineers with all professional certificates 
-            on national and international level.
-          </p>
-        </div>
-        
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {teamMembers.map((member, index) => (
-            <div key={index} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg hover:translate-y-[-2px] transition-all duration-300 group">
-              <div className="overflow-hidden">
-                <img 
-                  src={member.image} 
-                  alt={member.name} 
-                  className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
-                />
-              </div>
-              <div className="p-5">
-                <h3 className="text-lg font-bold text-blue-900 mb-1">{member.name}</h3>
-                <p className="text-blue-600 mb-2 text-sm">{member.position}</p>
-                {member.quote && (
-                  <p className="text-gray-500 italic text-xs mb-2">"{member.quote}"</p>
-                )}
-                <p className="text-gray-700 text-xs leading-relaxed">{member.description}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+      <TeamMembers/>
 
       {/* Company Journey */}
       <div className="bg-gray-50 py-12 lg:py-16">
         <div className="max-w-6xl mx-auto px-6 md:px-12">
           <div className="text-center mb-10">
             <h2 className="text-2xl font-bold text-blue-900 mb-3">Our Journey</h2>
+            <div className="w-20 h-1 bg-gradient-to-r from-yellow-400 to-blue-400 mx-auto rounded-full"></div>
             <p className="text-base text-gray-600 max-w-3xl mx-auto">
               Since our founding in 2016, we've grown consistently by delivering excellence in every project.
             </p>
@@ -425,6 +373,7 @@ export default function About() {
         <div className="bg-gray-50 rounded-2xl p-8 lg:p-10">
           <div className="text-center mb-8">
             <h2 className="text-2xl font-bold text-blue-900 mb-3">Ready to work with us?</h2>
+             <div className="w-20 h-1 bg-gradient-to-r from-yellow-400 to-blue-400 mx-auto rounded-full"></div>
             <p className="text-base text-gray-600 max-w-3xl mx-auto">
               Contact us today to discuss how we can help with your next project.
             </p>

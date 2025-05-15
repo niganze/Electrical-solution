@@ -59,7 +59,7 @@ const ScrollToTopButton = () => {
 
 // WhatsApp Button Component
 const WhatsAppButton = () => {
-  const phoneNumber = "+250786176444"; // Replace with actual WhatsApp number
+  const phoneNumber = "+250786176444";
   
   return (
     <motion.a
@@ -109,20 +109,6 @@ const Footer = () => {
       transition: {
         type: "spring",
         stiffness: 100
-      }
-    }
-  };
-
-  const glowVariants = {
-    animate: {
-      boxShadow: [
-        "0 0 20px rgba(251, 191, 36, 0)",
-        "0 0 40px rgba(251, 191, 36, 0.3)",
-        "0 0 20px rgba(251, 191, 36, 0)"
-      ],
-      transition: {
-        duration: 3,
-        repeat: Infinity
       }
     }
   };
@@ -194,7 +180,7 @@ const Footer = () => {
               <img src={LOGO} alt="Electrical Solution Company" className="h-20 w-auto" />
             </motion.div>
             <p className="text-sm text-gray-300 mb-4">
-              Powering Rwanda's future with innovative MEP solutions.
+              Powering Rwanda's future with innovative MEP solutions._
             </p>
             
             {/* Social Icons */}
@@ -260,11 +246,7 @@ const Footer = () => {
             className="text-center md:text-left"
           >
             <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
-            <motion.div
-              className="space-y-2"
-              variants={glowVariants}
-              animate="animate"
-            >
+            <div className="space-y-2">
               <motion.a
                 href="tel:+250786176444"
                 className="flex items-center justify-center md:justify-start text-sm text-gray-300 hover:text-yellow-400 transition-colors group"
@@ -288,7 +270,7 @@ const Footer = () => {
                 <MapPin size={14} className="mr-2" />
                 Kigali, Rwanda
               </motion.div>
-            </motion.div>
+            </div>
 
             {/* CTA Button */}
             <motion.div className="flex justify-center md:justify-start">

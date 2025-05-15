@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Menu, X, Home, MessageSquare, Zap } from "lucide-react";
+import { Menu, X, Home, MessageSquare, Download } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Logo from "../assets/images/electricallogo.png";
 
@@ -87,7 +87,7 @@ const Navbar = () => {
               <NavItem key={index} item={item} textColor={getTextColor()} scrolled={scrolled} />
             ))}
             <motion.a
-              href="/contact"
+              href="/company-profile.pdf"
               className="ml-2 px-5 py-2.5 bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 rounded-full font-semibold flex items-center text-sm shadow-lg relative overflow-hidden group"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -98,8 +98,8 @@ const Navbar = () => {
                 whileHover={{ x: 0, opacity: 0.2 }}
                 transition={{ duration: 0.3 }}
               />
-              <Zap className="mr-2 relative z-10" size={16} />
-              <span className="relative z-10">Get Quote</span>
+              <Download className="mr-2 relative z-10" size={16} />
+              <span className="relative z-10">Download Profile</span>
             </motion.a>
           </div>
 
@@ -135,7 +135,7 @@ const Navbar = () => {
                 <MobileNavItem key={index} item={item} />
               ))}
               <motion.a
-                href="/contact"
+                href="/company-profile.pdf"
                 className="w-full mt-4 px-5 py-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 rounded-full font-semibold flex items-center justify-center text-sm shadow-lg relative overflow-hidden group"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
@@ -146,8 +146,8 @@ const Navbar = () => {
                   whileHover={{ x: 0, opacity: 0.2 }}
                   transition={{ duration: 0.3 }}
                 />
-                <Zap className="mr-2 relative z-10" size={16} />
-                <span className="relative z-10">Get Quote</span>
+                <Download className="mr-2 relative z-10" size={16} />
+                <span className="relative z-10">Download Profile</span>
               </motion.a>
             </div>
           </motion.div>
@@ -190,12 +190,6 @@ const NavItem = ({ item, textColor, scrolled }) => {
           </motion.span>
         )}
         {item.title}
-        <motion.span
-          className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-500"
-          initial={{ scaleX: 0 }}
-          whileHover={{ scaleX: 1 }}
-          transition={{ duration: 0.3 }}
-        />
       </motion.a>
     </div>
   );
