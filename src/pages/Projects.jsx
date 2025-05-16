@@ -3,7 +3,7 @@ import { Search, Building, Hospital, Home, ShoppingBag, MapPin } from 'lucide-re
 import { Link, useNavigate } from 'react-router-dom';
 import Amarembo from '../assets/images/amarembo.jpeg';
 import IRCAD from '../assets/images/IRCAD.jpg';
-import Kabeza from '../assets/images/Kabeza.jpeg';
+import Kabeza from '../assets/images/kabeza.jpeg';
 import MAGERWA from '../assets/images/Magerwa.jpg';
 import Myhill from '../assets/images/Myhill.jpg';
 // Import a hero background image - replace with your actual path
