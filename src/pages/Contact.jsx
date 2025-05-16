@@ -408,7 +408,8 @@ const Contact = () => {
       <div id="map-section" className="bg-gray-50 py-12">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="text-center mb-8">
-            <h2 className="text-2xl font-bold text-gray-900">Visit Our Office</h2>
+            <h2 className="text-2xl font-bold text-blue-900">Visit Our Office</h2>
+            <span className="block h-1 w-16 bg-yellow-600 mt-2"></span>
             <p className="mt-2 text-gray-600">
               Visit us at our office in Kigali, Rwanda to discuss your MEP engineering needs.
             </p>
@@ -424,15 +425,18 @@ const Contact = () => {
               <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-red-500 rounded-full animate-ping opacity-75"></div>
             </div>
             
-            <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15950.308453339613!2d30.0588!3d-1.9441!5e0!3m2!1sen!2srw!4v1616123456789!5m2!1sen!2srw" 
-              width="100%" 
-              height="100%" 
-              style={{border: 0}} 
-              allowFullScreen="" 
-              loading="lazy"
-              title="Office Location"
-            ></iframe>
+            <div className="rounded-lg overflow-hidden shadow-lg h-96 relative">
+            {/* Animated map pin marker */}
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none">
+              <div className="w-5 h-5 bg-red-500 rounded-full flex items-center justify-center animate-pulse">
+                <div className="w-2 h-2 bg-white rounded-full"></div>
+              </div>
+              {/* Ripple effect */}
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-red-500 rounded-full animate-ping opacity-75"></div>
+            </div>
+            
+            <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=800&amp;hl=en&amp;q=Gisozi%20-%20ADARWA%20Building%20-%20KG%2033%20AVE+(Electrical%20Solution%20Ltd)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.gps.ie/collections/personal-trackers/">Personl trackers</a></iframe>
+          </div>
           </div>
         </div>
       </div>
@@ -440,7 +444,7 @@ const Contact = () => {
       {/* FAQ Section - modern and compact */}
       <div id="faq-section" className="max-w-3xl mx-auto px-4 py-12">
         <div className="text-center mb-8">
-          <h2 className="text-2xl font-bold text-gray-900">Frequently Asked Questions</h2>
+          <h2 className="text-2xl font-bold text-blue-900">Frequently Asked Questions</h2>
           <p className="mt-2 text-gray-600">
             Find answers to common questions about our services.
           </p>

@@ -34,9 +34,9 @@ const Navbar = () => {
   // Navigation items
   const navItems = [
     { title: "Home", link: "/", icon: <Home size={18} /> },
+    { title: "About Us", link: "/about" },
     { title: "Services", link: "/services" },
     { title: "Projects", link: "/projects" },
-    { title: "About Us", link: "/about" },
     { title: "Blogs & News", link: "/blogs" },
   ];
 

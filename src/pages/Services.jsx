@@ -191,7 +191,7 @@ function Services() {
                 </span>
                 <div className="absolute inset-0 bg-yellow-400 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
               </a>
-              <a href="#contact" className="group relative bg-transparent border-2 border-white hover:bg-white hover:text-gray-900 hover:shadow-2xl transform hover:scale-105 transition-all duration-300 text-white py-3 px-5 rounded-lg font-medium overflow-hidden text-base">
+              <a href="/contact" className="group relative bg-transparent border-2 border-white hover:bg-white hover:text-gray-900 hover:shadow-2xl transform hover:scale-105 transition-all duration-300 text-white py-3 px-5 rounded-lg font-medium overflow-hidden text-base">
                 <span className="relative z-10">Get a Quote</span>
                 <div className="absolute inset-0 bg-white transform translate-x-full group-hover:translate-x-0 transition-transform duration-300"></div>
               </a>
@@ -208,7 +208,7 @@ function Services() {
       </div>
 
       {/* Services Sections - Alternating Layouts */}
-      <div className="max-w-6xl mx-auto px-6 py-16">
+      <section id='services-list' className="max-w-6xl mx-auto px-6 py-16">
         <motion.div 
           className="space-y-20"
           variants={containerVariants}
@@ -313,7 +313,7 @@ function Services() {
             </motion.div>
           ))}
         </motion.div>
-      </div>
+      </section>
 
       {/* CTA Section */}
       <motion.div 

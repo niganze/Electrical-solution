@@ -128,7 +128,7 @@ const TestimonialsSection = () => {
         {/* Section heading */}
         <div className="text-center mb-16">
           <motion.h2 
-            className="text-3xl md:text-4xl font-bold mb-4"
+            className="text-2xl md:text-2xl font-bold mb-4"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -146,7 +146,7 @@ const TestimonialsSection = () => {
           />
           
           <motion.p 
-            className="text-blue-100 max-w-3xl mx-auto text-lg md:text-xl"
+            className="text-base text-blue-100 max-w-3xl mx-auto md:text-xl"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.5 }}

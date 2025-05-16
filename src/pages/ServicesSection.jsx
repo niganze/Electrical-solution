@@ -198,7 +198,7 @@ export default function ServicesSection() {
                         </li>
                       ))}
                     </ul>
-                    <a href="#" className="inline-flex items-center text-sm font-medium text-blue-600 hover:text-yellow-600 transition-colors">
+                    <a href="/services" className="inline-flex items-center text-sm font-medium text-blue-600 hover:text-yellow-600 transition-colors">
                       Learn More <ArrowRight className="ml-1 w-3 h-3" />
                     </a>
                   </div>

@@ -1,15 +1,9 @@
 import { useState, useEffect } from "react";
 import {
-  Zap,
-  Droplet,
-  Monitor,
   Users,
   Award,
   Building,
   Clock,
-  Bolt,
-  Leaf,
-  Star,
   Phone,
   Mail,
   MapPin,
@@ -37,7 +31,6 @@ import MepCalculation from "./MepCalculation";
 import TestimonialsSection from "./TestimonialsSection";
 
 const Home = () => {
-  const [activeTestimonial, setActiveTestimonial] = useState(0);
   const [activeHeroSlide, setActiveHeroSlide] = useState(0);
 
   // Animated counter hook
@@ -99,8 +92,6 @@ const Home = () => {
     },
   ];
 
-  
-
   const heroSlides = [
     {
       title: "Engineering Excellence",
@@ -142,8 +133,6 @@ const Home = () => {
     }, 5000);
     return () => clearInterval(timer);
   }, []);
-
-  
 
   return (
     <div className="min-h-screen overflow-x-hidden">
@@ -196,11 +185,25 @@ const Home = () => {
                 ))}
 
                 <div className="flex flex-wrap gap-4 justify-center md:justify-start">
-                  <button className="px-6 py-3 bg-yellow-500 text-blue-900 rounded-full font-medium hover:bg-yellow-400 transition-all">
+                  <button
+                    className="px-6 py-3 bg-yellow-500 text-blue-900 rounded-full font-medium hover:bg-yellow-400 transition-all"
+                    onClick={() => {
+                      document
+                        .getElementById("mission")
+                        .scrollIntoView({ behavior: "smooth" });
+                    }}
+                  >
                     Get Started
                   </button>
-                  <button className="px-6 py-3 bg-transparent border-2 border-white rounded-full font-medium hover:bg-white hover:text-blue-900 transition-all">
-                    Calculator
+                  <button
+                    className="px-6 py-3 bg-transparent border-2 border-white rounded-full font-medium hover:bg-white hover:text-blue-900 transition-all"
+                    onClick={() => {
+                      document
+                        .getElementById("calculotor")
+                        .scrollIntoView({ behavior: "smooth" });
+                    }}
+                  >
+                    Estimate Your MEP Project
                   </button>
                 </div>
 
@@ -264,7 +267,7 @@ const Home = () => {
       </section>
 
       {/* Modern Mission and Vision Section - Medium Size */}
-      <section className="py-12 bg-white relative overflow-hidden">
+      <section id="mission" className="py-12 bg-white relative overflow-hidden">
         {/* Animated background gradients */}
         <div className="absolute inset-0">
           <div className="absolute top-0 left-1/4 w-72 h-72 bg-gradient-to-br from-yellow-200 to-yellow-100 rounded-full blur-3xl opacity-30 animate-blob"></div>
@@ -278,7 +281,7 @@ const Home = () => {
             <h2 className="text-xl font-semibold text-yellow-500 mb-2">
               Mission & Vision
             </h2>
-           
+
             <p className="text-gray-600 max-w-3xl mx-auto text-sm mb-4">
               Building excellence with integrity, innovation, and precision. We
               are committed to delivering high-quality construction solutions

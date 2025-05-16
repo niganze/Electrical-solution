@@ -174,7 +174,7 @@ const MepCalculation = () => {
   };
 
   return (
-    <div className="bg-gray-200 py-8 px-4 sm:px-6 lg:px-8 rounded-lg shadow-md min-h-screen">
+    <section id='calculotor' className="bg-gray-200 py-8 px-4 sm:px-6 lg:px-8 rounded-lg shadow-md min-h-screen">
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-8">
           <h2 className="text-xl font-semibold text-yellow-500 mb-2">MEP Cost Estimator</h2>
@@ -386,7 +386,7 @@ const MepCalculation = () => {
                 
                 <div className="flex flex-col sm:flex-row gap-2">
                   <a
-                    href="#contact" 
+                    href="/contact" 
                     className="flex-1 bg-blue-600 hover:bg-blue-700 text-center text-white font-medium py-2 px-4 rounded-lg transition duration-200 text-xs"
                     onClick={() => setShowModal(false)}
                   >
@@ -412,7 +412,7 @@ const MepCalculation = () => {
           </p>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
