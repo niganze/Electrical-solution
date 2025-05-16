@@ -356,81 +356,125 @@ export default function About() {
         </div>
       </div>
 
-      {/* Testimonial Quote */}
-      <div className="bg-blue-700 text-white py-12 lg:py-14">
-        <div className="max-w-5xl mx-auto px-6 md:px-12 text-center">
-          <svg className="w-10 h-10 mx-auto mb-3 text-yellow-400 opacity-80" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
-            <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
-          </svg>
-          <p className="text-xl lg:text-2xl font-light">
-            "Customer satisfaction is not just a goal; it's the foundation of our success."
-          </p>
-        </div>
+      {/* Testimonial Quote - Modern Floating Card (Medium Size) */}
+<div className="relative bg-gradient-to-r from-blue-800 to-blue-900 text-white py-12 lg:py-14 overflow-hidden">
+  {/* Abstract Background Elements */}
+  <div className="absolute inset-0 opacity-10">
+    <div className="absolute top-10 left-10 w-32 h-32 rounded-full bg-yellow-400"></div>
+    <div className="absolute bottom-10 right-20 w-40 h-40 rounded-full bg-blue-400"></div>
+    <div className="absolute top-1/2 left-1/2 w-60 h-60 rounded-full bg-blue-300 -translate-x-1/2 -translate-y-1/2"></div>
+  </div>
+  
+  <div className="max-w-4xl mx-auto px-6 md:px-8 text-center relative z-10">
+    <div className="bg-white/10 backdrop-blur-sm p-6 lg:p-8 rounded-xl shadow-lg border border-white/20">
+      <svg className="w-10 h-10 mx-auto mb-4 text-yellow-400" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
+      </svg>
+      <p className="text-xl lg:text-2xl font-light leading-relaxed">
+        "Customer satisfaction is not just a goal; it's the foundation of our success."
+      </p>
+      <div className="mt-4 flex items-center justify-center">
+        <div className="h-px w-8 bg-yellow-400"></div>
+        <p className="mx-3 text-xs text-yellow-300 font-medium">OUR PHILOSOPHY</p>
+        <div className="h-px w-8 bg-yellow-400"></div>
       </div>
+    </div>
+  </div>
+</div>
 
-      {/* Contact CTA */}
-      <div className="max-w-6xl mx-auto px-6 md:px-12 py-12 lg:py-16">
-        <div className="bg-gray-50 rounded-2xl p-8 lg:p-10">
-          <div className="text-center mb-8">
-            <h2 className="text-2xl font-bold text-blue-900 mb-3">Ready to work with us?</h2>
-             <div className="w-20 h-1 bg-gradient-to-r from-yellow-400 to-blue-400 mx-auto rounded-full"></div>
-            <p className="text-base text-gray-600 max-w-3xl mx-auto">
-              Contact us today to discuss how we can help with your next project.
-            </p>
-          </div>
-          
-          <div className="flex flex-col md:flex-row justify-center gap-6">
-            <div className="bg-white p-5 rounded-xl shadow-sm flex items-center hover:shadow-md hover:translate-y-[-2px] transition-all duration-300 group">
-              <div className="bg-blue-100 p-2.5 rounded-full mr-3 group-hover:bg-yellow-400 transition-colors">
-                <svg className="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+{/* Contact CTA - Modern with Background Image (Medium Size) */}
+<div className="relative py-12 lg:py-16 overflow-hidden">
+  {/* Background Image with Overlay */}
+  <div className="absolute inset-0 z-0">
+    <div 
+      className="absolute inset-0 bg-gradient-to-r from-blue-900/90 to-blue-700/80 mix-blend-multiply"
+      style={{
+        backgroundImage: `url(${AboutUsImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+    ></div>
+  </div>
+  
+  <div className="max-w-5xl mx-auto px-6 md:px-8 relative z-10">
+    <div className="flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-10">
+      {/* Left Side - Text Content with improved visibility */}
+      <div className="lg:w-1/2">
+        <h2 className="text-2xl lg:text-3xl font-bold text-white mb-4 drop-shadow-lg shadow-black">
+          Ready to transform your electrical systems?
+        </h2>
+        <div className="w-20 h-1 bg-gradient-to-r from-yellow-400 to-yellow-300 rounded-full mb-4 shadow-md"></div>
+        <p className="text-base text-white mb-6 drop-shadow text-shadow leading-relaxed">
+          Contact our expert team today to discuss how we can help with your next project. We're here to provide innovative electrical solutions tailored to your needs.
+        </p>
+        
+        <a 
+          href="/contact" 
+          className="inline-flex items-center bg-yellow-400 hover:bg-yellow-300 text-blue-900 py-2.5 px-6 rounded-lg font-medium transition-all duration-300 hover:translate-y-[-2px] hover:shadow-md group shadow-lg"
+        >
+          Contact Us
+          <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </a>
+      </div>
+      
+      {/* Right Side - Contact Cards with improved visibility */}
+      <div className="lg:w-1/2 mt-8 lg:mt-0">
+        <div className="bg-white/10 backdrop-blur-md rounded-xl p-5 lg:p-6 border border-white/20 shadow-xl">
+          <div className="grid gap-4">
+            {/* Phone Card */}
+            <div className="bg-white/15 backdrop-blur p-4 rounded-lg hover:bg-white/25 transition-all duration-300 flex items-center group shadow-md">
+              <div className="bg-yellow-400 p-2.5 rounded-full mr-3 group-hover:scale-105 transition-transform shadow-md">
+                <svg className="w-5 h-5 text-blue-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                 </svg>
               </div>
               <div>
-                <div className="text-xs text-gray-500">Phone</div>
-                <a href="tel:+250786176444" className="font-semibold text-blue-900 hover:text-blue-600 text-sm">
+                <div className="text-xs text-white/90 font-medium drop-shadow">Phone</div>
+                <a href="tel:+250786176444" className="font-semibold text-white text-base hover:text-yellow-300 transition-colors drop-shadow">
                   +250 786 176 444
                 </a>
               </div>
             </div>
             
-            <div className="bg-white p-5 rounded-xl shadow-sm flex items-center hover:shadow-md hover:translate-y-[-2px] transition-all duration-300 group">
-              <div className="bg-blue-100 p-2.5 rounded-full mr-3 group-hover:bg-yellow-400 transition-colors">
-                <svg className="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            {/* Email Card */}
+            <div className="bg-white/15 backdrop-blur p-4 rounded-lg hover:bg-white/25 transition-all duration-300 flex items-center group shadow-md">
+              <div className="bg-yellow-400 p-2.5 rounded-full mr-3 group-hover:scale-105 transition-transform shadow-md">
+                <svg className="w-5 h-5 text-blue-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
               </div>
               <div>
-                <div className="text-xs text-gray-500">Email</div>
-                <a href="mailto:info@electricalsolutionco.rw" className="font-semibold text-blue-900 hover:text-blue-600 text-sm">
+                <div className="text-xs text-white/90 font-medium drop-shadow">Email</div>
+                <a href="mailto:info@electricalsolutionco.rw" className="font-semibold text-white text-base hover:text-yellow-300 transition-colors drop-shadow">
                   info@electricalsolutionco.rw
                 </a>
               </div>
             </div>
             
-            <div className="bg-white p-5 rounded-xl shadow-sm flex items-center hover:shadow-md hover:translate-y-[-2px] transition-all duration-300 group">
-              <div className="bg-blue-100 p-2.5 rounded-full mr-3 group-hover:bg-yellow-400 transition-colors">
-                <svg className="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            {/* Location Card */}
+            <div className="bg-white/15 backdrop-blur p-4 rounded-lg hover:bg-white/25 transition-all duration-300 flex items-center group shadow-md">
+              <div className="bg-yellow-400 p-2.5 rounded-full mr-3 group-hover:scale-105 transition-transform shadow-md">
+                <svg className="w-5 h-5 text-blue-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
               </div>
               <div>
-                <div className="text-xs text-gray-500">Location</div>
-                <div className="font-semibold text-blue-900 text-sm">
+                <div className="text-xs text-white/90 font-medium drop-shadow">Location</div>
+                <div className="font-semibold text-white text-base drop-shadow">
                   Gisozi - ADARWA Building - KG 33 AVE
                 </div>
               </div>
             </div>
           </div>
-          
-          <div className="text-center mt-8">
-            <a href="/contact" className="inline-flex items-center bg-blue-600 hover:bg-yellow-500 hover:text-blue-900 text-white py-2.5 px-6 rounded-lg font-medium transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg">
-              Contact Us
-            </a>
-          </div>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
 
       <style jsx>{`
         @keyframes fade-in {
