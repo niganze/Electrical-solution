@@ -21,7 +21,7 @@ import green from '../assets/images/green.jpeg';
 import green1 from '../assets/images/green1.jpeg';
 import green2 from '../assets/images/green2.jpeg';
 
-import power from '../assets/images/power.jpg';
+import power from '../assets/images/Power.jpg';
 import power1 from '../assets/images/power1.webp';
 import power2 from '../assets/images/power2.jpg';
 
