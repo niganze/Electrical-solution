@@ -3,10 +3,9 @@ import { useParams, Link } from 'react-router-dom';
 import { MapPin, Calendar, Building, ChevronLeft, CheckCircle, ArrowRight } from 'lucide-react';
 import Amarembo from '../assets/images/amarembo.jpeg';
 import IRCAD from '../assets/images/IRCAD.jpg';
-import Kabeza from '../assets/images/Kabeza.jpeg';
+import Kabeza from '../assets/images/kabeza.jpeg';
 import MAGERWA from '../assets/images/Magerwa.jpg';
 import Myhill from '../assets/images/Myhill.jpg';
-
 function SingleProject() {
   const { id } = useParams();
   const [project, setProject] = useState(null);
