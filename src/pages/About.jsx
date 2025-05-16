@@ -431,8 +431,8 @@ export default function About() {
                 </svg>
               </div>
               <div>
-                <div className="text-xs text-white/90 font-medium drop-shadow">Phone</div>
-                <a href="tel:+250786176444" className="font-semibold text-white text-base hover:text-yellow-300 transition-colors drop-shadow">
+                <div className="text-xs text-blue-500 font-medium drop-shadow">Phone</div>
+                <a href="tel:+250786176444" className="font-semibold text-blue-500 text-base hover:text-yellow-300 transition-colors drop-shadow">
                   +250 786 176 444
                 </a>
               </div>
@@ -446,8 +446,8 @@ export default function About() {
                 </svg>
               </div>
               <div>
-                <div className="text-xs text-white/90 font-medium drop-shadow">Email</div>
-                <a href="mailto:info@electricalsolutionco.rw" className="font-semibold text-white text-base hover:text-yellow-300 transition-colors drop-shadow">
+                <div className="text-xs text-white font-medium drop-shadow">Email</div>
+                <a href="mailto:info@electricalsolutionco.rw" className="font-semibold text-blue-500 text-base hover:text-yellow-300 transition-colors drop-shadow">
                   info@electricalsolutionco.rw
                 </a>
               </div>
@@ -462,8 +462,8 @@ export default function About() {
                 </svg>
               </div>
               <div>
-                <div className="text-xs text-white/90 font-medium drop-shadow">Location</div>
-                <div className="font-semibold text-white text-base drop-shadow">
+                <div className="text-xs text-blue-500 font-medium drop-shadow">Location</div>
+                <div className="font-semibold text-blue-500 text-base drop-shadow">
                   Gisozi - ADARWA Building - KG 33 AVE
                 </div>
               </div>
