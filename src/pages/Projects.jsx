@@ -218,11 +218,7 @@ function Projects() {
                     alt={project.title} 
                     className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all flex items-center justify-center">
-                    <span className="px-3 py-1 bg-yellow-400 text-gray-900 font-medium rounded-md opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
-                      View Project
-                    </span>
-                  </div>
+    
                   <div className="absolute top-0 right-0 bg-yellow-400 text-gray-900 font-medium px-2 py-1 text-sm">
                     {project.year}
                   </div>

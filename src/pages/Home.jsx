@@ -415,7 +415,7 @@ const Home = () => {
             {projects.map((project, index) => (
               <div
                 key={index}
-                className="group cursor-pointer transform transition-all duration-300 hover:-translate-y-2"
+                className="group transform transition-all duration-300 hover:-translate-y-2"
               >
                 <div className="relative overflow-hidden rounded-xl">
                   <img
@@ -448,7 +448,6 @@ const Home = () => {
 
       {/* Modern Testimonials Slider */}
       <TestimonialsSection />
-
       <section className="py-12 bg-gray-50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-10">
