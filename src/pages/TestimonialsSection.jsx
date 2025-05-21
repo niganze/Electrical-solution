@@ -60,7 +60,7 @@ const TestimonialsSection = () => {
       company: "Landmark Properties",
       text: "Their attention to safety standards while maintaining efficiency was impressive. The team was communicative throughout and addressed all our concerns.",
       rating: 4,
-      image: person, // Placeholder image
+      image: person, 
     },
     {
       id: 5,

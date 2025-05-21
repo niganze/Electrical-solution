@@ -66,13 +66,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             <h3 className="px-4 text-xs uppercase text-gray-500 font-semibold mb-2">
               Business Services
             </h3>
-            <Link
-              to="/dashboard/services"
-              className="flex items-center py-2 px-4 rounded-lg mb-1 transition-all duration-300 text-gray-600 hover:bg-gray-100 hover:translate-x-1 cursor-pointer"
-            >
-              <Settings className="mr-3" size={20} />
-              Services
-            </Link>
+            
             <Link
               to="/dashboard/mepcalculations"
               className="flex items-center py-2 px-4 rounded-lg mb-1 transition-all duration-300 text-gray-600 hover:bg-gray-100 hover:translate-x-1 cursor-pointer"

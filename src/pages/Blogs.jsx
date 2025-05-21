@@ -39,7 +39,6 @@ export default function Blogs() {
       date: 'May 3, 2025',
       readTime: '6 min read',
       category: 'Design',
-      
       image: blog1,
     },
     {

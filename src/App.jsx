@@ -17,8 +17,7 @@ import Dashboard from './admin/Dashboard';
 import Team from './admin/Team';
 import Testi from './admin/Testi';
 import Project from './admin/Project';
-import Blog from './admin/Blog';
-import ServicesAdmin from './admin/ServicesAdmin';  
+import Blog from './admin/Blog'; 
 import MEPCostEstimator from './admin/MEPCostEstimator';
 import Partners from './admin/Partners';
 
@@ -48,9 +47,8 @@ function App() {
           <Route path='blogs' element={<Blog />} />
           <Route path='projects' element={<Project />} />
           <Route path='testimonials' element={<Testi />} />
-          <Route path='services' element={<ServicesAdmin />} />
           <Route path='mepcalculations' element={<MEPCostEstimator />} />
-           <Route path='partners' element={<Partners />} />
+           <Route path='partner' element={<Partners />} />
           <Route path='team'element={<Team />} /> 
           </Route>
       </Routes>

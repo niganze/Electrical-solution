@@ -24,9 +24,6 @@ function SingleProject() {
       year: "2023",
       client: "IRCAD Foundation",
       services: ["Electrical Systems", "Low Current Installation", "Medical Equipment Power"],
-      challenge: "Implementing medical-grade electrical systems that meet international healthcare standards while ensuring reliability for critical care equipment.",
-      solution: "Designed and installed a redundant power system with UPS backup for critical areas, while ensuring compliance with medical facility electrical codes.",
-      results: "Successfully delivered a hospital-grade electrical system that has maintained 100% uptime for critical care areas since installation.",
       gallery: [IRCAD, IRCAD, IRCAD] // Ideally you'd have multiple images
     },
     {
