@@ -1,496 +1,377 @@
-import React, { useState, useEffect } from 'react';
-import { useForm, Controller } from 'react-hook-form';
-import { useParams, useNavigate } from 'react-router-dom';
-import { 
-  MapPin, 
-  FileText, 
-  Grid,
-  Plus,
-  X,
-  Image
-} from 'lucide-react';
+import React, { useState } from "react";
+import axios from "axios";
 import { Editor } from "primereact/editor";
-import axios from 'axios';
 
-const CreateProject = () => {
-  const { id } = useParams();
-  const navigate = useNavigate();
-  const isEditMode = !!id;
-
-  const [featureImage, setFeatureImage] = useState(null);
-  const [previewImages, setPreviewImages] = useState([]);
-  const [scopeItems, setScopeItems] = useState(['']);
-  const [newScopeItem, setNewScopeItem] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState({ type: '', message: '' });
-  const [fetchingProject, setFetchingProject] = useState(isEditMode);
-
-  const { 
-    register, 
-    handleSubmit, 
-    control,
-    reset,
-    setValue,
-    formState: { errors } 
-  } = useForm({
-    defaultValues: {
-      name: "",
-      category: "",
-      location: "",
-      client_name: "",
-      fullDescription: ""
-    }
+function CreateProject() {
+  const [formData, setFormData] = useState({
+    title: "",
+    category: "",
+    description: "",
+    location: "",
+    year: new Date().getFullYear().toString(),
+    client: "",
+    services: [],
+    content: "",
   });
 
-  useEffect(() => {
-    if (isEditMode) {
-      const fetchProjectData = async () => {
-        try {
-          setFetchingProject(true);
-          const response = await axios.get(`https://api.we-mep.rw/api/projects/${id}`);
-          const project = response.data;
+  const [imageFile, setImageFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState("");
+  const [galleryFiles, setGalleryFiles] = useState([]);
+  const [galleryPreviews, setGalleryPreviews] = useState([]);
+  const [newService, setNewService] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState({ text: "", type: "" });
 
-          setValue('name', project.name);
-          setValue('category', project.category);
-          setValue('location', project.location);
-          setValue('client_name', project.client_name);
-          setValue('fullDescription', project.fullDescription);
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
 
-          if (project.scopeOfWork && Array.isArray(project.scopeOfWork)) {
-            setScopeItems(project.scopeOfWork);
-          } else if (project.scopeOfWork && typeof project.scopeOfWork === 'string') {
-            try {
-              const parsedScope = JSON.parse(project.scopeOfWork);
-              setScopeItems(Array.isArray(parsedScope) ? parsedScope : ['']);
-            } catch (e) {
-              setScopeItems([project.scopeOfWork]);
-            }
-          }
-
-          if (project.image) {
-            setFeatureImage({ file: null, preview: project.image, existing: true });
-          }
-
-          if (project.galleryImages && Array.isArray(project.galleryImages)) {
-            const existingImages = project.galleryImages.map(img => ({
-              file: null,
-              preview: img,
-              existing: true
-            }));
-            setPreviewImages(existingImages);
-          }
-
-        } catch (error) {
-          let errorMessage = 'Failed to load project data.';
-          if (error.response) {
-            errorMessage = error.response.data?.message || `Server error: ${error.response.status} - ${error.response.statusText}`;
-          } else if (error.request) {
-            errorMessage = 'No response received from server. Please check your network connection.';
-          } else {
-            errorMessage = error.message || 'An unknown error occurred';
-          }
-          setSubmitStatus({ type: 'error', message: errorMessage });
-        } finally {
-          setFetchingProject(false);
-        }
-      };
-      fetchProjectData();
-    }
-  }, [id, isEditMode, setValue]);
-
-  const handleFeatureImageUpload = (e) => {
+  const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setFeatureImage({ file: file, preview: reader.result, existing: false });
-      };
-      reader.readAsDataURL(file);
+      setImageFile(file);
+      setImagePreview(URL.createObjectURL(file));
     }
   };
 
-  const handleGalleryImagesUpload = (e) => {
+  const handleGalleryImagesChange = (e) => {
     const files = Array.from(e.target.files);
     if (files.length > 0) {
-      const newPreviews = [...previewImages];
-      files.forEach(file => {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          newPreviews.push({ file: file, preview: reader.result, existing: false });
-          setPreviewImages([...newPreviews]);
-        };
-        reader.readAsDataURL(file);
-      });
+      setGalleryFiles([...galleryFiles, ...files]);
+
+      const newPreviews = files.map((file) => URL.createObjectURL(file));
+      setGalleryPreviews([...galleryPreviews, ...newPreviews]);
     }
   };
 
-  const removeFeatureImage = () => setFeatureImage(null);
   const removeGalleryImage = (index) => {
-    const updatedPreviews = [...previewImages];
-    updatedPreviews.splice(index, 1);
-    setPreviewImages(updatedPreviews);
+    const updatedGalleryFiles = [...galleryFiles];
+    const updatedGalleryPreviews = [...galleryPreviews];
+
+    updatedGalleryFiles.splice(index, 1);
+    updatedGalleryPreviews.splice(index, 1);
+
+    setGalleryFiles(updatedGalleryFiles);
+    setGalleryPreviews(updatedGalleryPreviews);
   };
 
-  const addScopeItem = () => {
-    if (newScopeItem.trim() !== '') {
-      setScopeItems([...scopeItems, newScopeItem]);
-      setNewScopeItem('');
+  const addService = () => {
+    if (newService.trim() !== "") {
+      setFormData({
+        ...formData,
+        services: [...formData.services, newService.trim()],
+      });
+      setNewService("");
     }
   };
-  const removeScopeItem = (index) => {
-    const updatedScopeItems = [...scopeItems];
-    updatedScopeItems.splice(index, 1);
-    setScopeItems(updatedScopeItems);
+
+  const removeService = (index) => {
+    const updatedServices = [...formData.services];
+    updatedServices.splice(index, 1);
+    setFormData({
+      ...formData,
+      services: updatedServices,
+    });
   };
 
-  const onSubmit = async (data) => {
-    setIsLoading(true);
-    setSubmitStatus({ type: '', message: '' });
+  const handleEditorChange = (htmlValue) => {
+    setFormData((prev) => ({
+      ...prev,
+      content: htmlValue,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setMessage({ text: "", type: "" });
 
     try {
-      const formData = new FormData();
-      formData.append('name', data.name);
-      formData.append('category', data.category);
-      formData.append('location', data.location);
-      formData.append('client_name', data.client_name);
-      formData.append('fullDescription', data.fullDescription);
+      // Create a FormData object to handle file uploads
+      const projectData = new FormData();
 
-      const filteredScopeItems = scopeItems.filter(item => item.trim() !== '');
-      formData.append('scopeOfWork', JSON.stringify(filteredScopeItems));
-
-      if (featureImage?.file) {
-        formData.append('image', featureImage.file);
-      }
-
-      if (previewImages.length > 0) {
-        previewImages.forEach((img) => {
-          if (!img.existing && img.file) {
-            formData.append('galleryImages', img.file);
-          }
-        });
-      }
-
-      if (isEditMode) {
-        const existingGalleryUrls = previewImages.filter(img => img.existing).map(img => img.preview);
-        if (existingGalleryUrls.length > 0) {
-          formData.append('existingGalleryImages', JSON.stringify(existingGalleryUrls));
+      // Append all form fields
+      Object.keys(formData).forEach((key) => {
+        if (key === "services") {
+          projectData.append(key, JSON.stringify(formData[key]));
+        } else {
+          projectData.append(key, formData[key]);
         }
-        formData.append('keepExistingImage', featureImage && featureImage.existing ? 'true' : 'false');
+      });
+
+      // Append main image
+      if (imageFile) {
+        projectData.append("image", imageFile);
       }
 
-      const url = isEditMode 
-        ? `https://api.we-mep.rw/api/projects/${id}` 
-        : 'https://api.we-mep.rw/api/projects';
-      const method = isEditMode ? 'PUT' : 'POST';
-
-      const response = await axios({
-        method: method,
-        url: url,
-        data: formData,
-        headers: { 'Content-Type': 'multipart/form-data' }
+      // Append gallery images
+      galleryFiles.forEach((file) => {
+        projectData.append("gallery", file);
       });
 
-      setSubmitStatus({
-        type: 'success',
-        message: `Project ${isEditMode ? 'updated' : 'created'} successfully!`
+      // Send the form data to your API endpoint
+      const response = await axios.post("/api/projects", projectData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       });
 
-      setTimeout(() => {
-        navigate('/dashboard/projects');
-      }, 2000);
+      setMessage({
+        text: "Project created successfully!",
+        type: "success",
+      });
 
+      // Reset form after successful submission
+      setFormData({
+        title: "",
+        category: "",
+        description: "",
+        location: "",
+        year: new Date().getFullYear().toString(),
+        client: "",
+        services: [],
+        content: "",
+      });
+      setImageFile(null);
+      setImagePreview("");
+      setGalleryFiles([]);
+      setGalleryPreviews([]);
     } catch (error) {
-      let errorMessage = `Failed to ${isEditMode ? 'update' : 'create'} project.`;
-      if (error.response) {
-        errorMessage = error.response.data?.message || `Server error: ${error.response.status} - ${error.response.statusText}`;
-      } else if (error.request) {
-        errorMessage = 'No response received from server. Please check your network connection.';
-      } else {
-        errorMessage = error.message || 'An unknown error occurred';
-      }
-      setSubmitStatus({ type: 'error', message: errorMessage });
+      console.error("Error creating project:", error);
+      setMessage({
+        text:
+          error.response?.data?.message ||
+          "Failed to create project. Please try again.",
+        type: "error",
+      });
     } finally {
-      setIsLoading(false);
+      setLoading(false);
     }
   };
 
-  if (fetchingProject) {
-    return (
-      <div className="container mx-auto px-4 py-6 flex justify-center items-center min-h-screen">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading project data...</p>
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div className="container mx-auto px-4 py-6">
-      <div className="bg-white shadow-md rounded-lg p-6">
-        <h2 className="text-xl font-semibold text-gray-800 mb-6 text-center">
-          {isEditMode ? 'Edit Project' : 'Create New Project'}
-        </h2>
+    <div className="max-w-4xl mx-auto p-6 bg-white rounded shadow">
+      <h1 className="text-xl font-semibold mb-6">Create New Project</h1>
 
-        {submitStatus.message && (
-          <div className={`mb-4 p-3 rounded ${
-            submitStatus.type === 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
-          }`}>
-            {submitStatus.message}
-          </div>
-        )}
+      {message.text && (
+        <div
+          className={`p-4 mb-4 rounded ${
+            message.type === "success"
+              ? "bg-green-100 text-green-700"
+              : "bg-red-100 text-red-700"
+          }`}
+        >
+          {message.text}
+        </div>
+      )}
 
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-
-        <div className="mb-4">
-
-            <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center">
-              <FileText className="mr-2 text-gray-500" size={16} />
-              client Name
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Project Title *
             </label>
             <input
               type="text"
-              {...register('client_name', { required: 'Client name is required' })}
-              className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
+              name="title"
+              value={formData.title}
+              onChange={handleInputChange}
+              className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="e.g. IRCAD Hospital Project"
+              required
             />
-            {errors.client_name && (
-              <p className="text-red-500 text-sm mt-1">{errors.client_name.message}</p>
-            )}
-          </div>
-          {/* Project Name */}
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center">
-              <FileText className="mr-2 text-gray-500" size={16} />
-              Project Name
-            </label>
-            <input 
-              {...register("name", { required: "Project name is required" })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
-              placeholder="Enter project name"
-            />
-            {errors.name && (
-              <p className="text-red-500 text-xs mt-1">{errors.name.message}</p>
-            )}
           </div>
 
-          {/* Project Category */}
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center">
-              <Grid className="mr-2 text-gray-500" size={16} />
-              Project Category
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Category *
             </label>
-            <select 
-              {...register("category", { required: "Category is required" })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
-            >
-              <option value="">Select Category</option>
-              <option value="Government office">Government Office</option>
-              <option value="Commercial">Commercial</option>
-              <option value="Apartments">Apartments</option>
-              <option value="Industrial">Industrial</option>
-              <option value="Maintanance">Maintanance</option>
-              <option value="Design&built">Design&built</option>
-              <option value="Healthcare">Healthcare</option>
-              <option value="Aviation">Aviation</option>
-            
-            </select>
-            {errors.category && (
-              <p className="text-red-500 text-xs mt-1">{errors.category.message}</p>
-            )}
-          </div>
-
-          {/* Location */}
-          <div className="mb-4">
-            <label className="text-sm font-medium text-gray-700 mb-1 flex items-center">
-              <MapPin className="mr-2 text-gray-500" size={16} />
-              Project Location
-            </label>
-            <input 
-              {...register("location", { required: "Location is required" })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
-              placeholder="Enter project location"
+            <input
+              type="text"
+              name="category"
+              value={formData.category}
+              onChange={handleInputChange}
+              className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="e.g. healthcare"
+              required
             />
-            {errors.location && (
-              <p className="text-red-500 text-xs mt-1">{errors.location.message}</p>
-            )}
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Client *
+            </label>
+            <input
+              type="text"
+              name="client"
+              value={formData.client}
+              onChange={handleInputChange}
+              className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="e.g. IRCAD Foundation"
+              required
+            />
           </div>
 
-          {/* Feature Image (Main Project Image) */}
-          <div className="mb-4">
-            <label className="text-sm font-medium text-gray-700 mb-1 flex items-center">
-              <Image className="mr-2 text-gray-500" size={16} />
-              Main Project Image {isEditMode && featureImage?.existing && "(Current image shown below)"}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Year *
             </label>
-            <input 
+            <input
+              type="text"
+              name="year"
+              value={formData.year}
+              onChange={handleInputChange}
+              className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="e.g. 2023"
+              required
+            />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Location *
+            </label>
+            <input
+              type="text"
+              name="location"
+              value={formData.location}
+              onChange={handleInputChange}
+              className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="e.g. Kigali, Rwanda"
+              required
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Main Image *
+            </label>
+            <input
               type="file"
               accept="image/*"
-              onChange={handleFeatureImageUpload}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm file:mr-2 file:px-2 file:py-1 file:text-xs file:bg-gray-100 file:border-0 file:rounded"
+              onChange={handleImageChange}
+              className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
             />
-            
-            {featureImage && (
-              <div className="mt-2 relative group">
-                <img 
-                  src={featureImage.preview} 
-                  alt="Main Project Image" 
-                  className="h-40 w-full object-cover rounded-md"
+            {imagePreview && (
+              <div className="mt-2">
+                <img
+                  src={imagePreview}
+                  alt="Preview"
+                  className="h-32 w-auto object-cover rounded"
                 />
-                <button
-                  type="button"
-                  onClick={removeFeatureImage}
-                  className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
-                >
-                  <X size={16} />
-                </button>
-                {featureImage.existing && (
-                  <span className="absolute bottom-2 right-2 bg-blue-500 text-white text-xs px-2 py-1 rounded">
-                    Current Image
-                  </span>
-                )}
               </div>
             )}
           </div>
+        </div>
 
-          {/* Scope of Works (Array) */}
-          <div className="mb-4">
-            <label className="text-sm font-medium text-gray-700 mb-1 flex items-center">
-              <FileText className="mr-2 text-gray-500" size={16} />
-              Scope of Works
-            </label>
-            
-            <div className="space-y-2 mb-2">
-              {scopeItems.map((item, index) => (
-                <div key={index} className="flex items-center">
-                  {index === 0 && item === '' ? (
-                    <input
-                      value={item}
-                      onChange={(e) => {
-                        const updated = [...scopeItems];
-                        updated[index] = e.target.value;
-                        setScopeItems(updated);
-                      }}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
-                      placeholder="Add scope item"
-                    />
-                  ) : (
-                    <>
-                      <div className="flex-grow px-3 py-2 border border-gray-300 rounded-md text-sm bg-gray-50">
-                        {item}
-                      </div>
-                      <button 
-                        type="button" 
-                        onClick={() => removeScopeItem(index)}
-                        className="ml-2 p-1 text-red-500 hover:text-red-700"
-                      >
-                        <X size={16} />
-                      </button>
-                    </>
-                  )}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Gallery Images (Multiple)
+          </label>
+          <input
+            type="file"
+            accept="image/*"
+            multiple
+            onChange={handleGalleryImagesChange}
+            className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+
+          {galleryPreviews.length > 0 && (
+            <div className="mt-2 flex flex-wrap gap-2">
+              {galleryPreviews.map((preview, index) => (
+                <div key={index} className="relative">
+                  <img
+                    src={preview}
+                    alt={`Gallery ${index + 1}`}
+                    className="h-24 w-auto object-cover rounded"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => removeGalleryImage(index)}
+                    className="absolute top-0 right-0 bg-red-500 text-white w-5 h-5 flex items-center justify-center rounded-full text-xs"
+                  >
+                    ×
+                  </button>
                 </div>
               ))}
             </div>
-            
-            <div className="flex">
-              <input
-                value={newScopeItem}
-                onChange={(e) => setNewScopeItem(e.target.value)}
-                className="flex-grow px-3 py-2 border border-gray-300 rounded-l-md text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
-                placeholder="Add new scope item"
-              />
-              <button
-                type="button"
-                onClick={addScopeItem}
-                className="bg-blue-500 text-white px-3 py-2 rounded-r-md hover:bg-blue-600"
-              >
-                <Plus size={16} />
-              </button>
-            </div>
-          </div>
+          )}
+        </div>
 
-          {/* Full Description with Rich Text Editor */}
-          <div className="mb-4">
-            <label className="text-sm font-medium text-gray-700 mb-1 flex items-center">
-              <FileText className="mr-2 text-gray-500" size={16} />
-              Full Description
-            </label>
-            <Controller
-              name="fullDescription"
-              control={control}
-              rules={{ required: "Full description is required" }}
-              render={({ field }) => (
-                <Editor 
-                  value={field.value} 
-                  onTextChange={(e) => field.onChange(e.htmlValue)}
-                  style={{ height: '320px' }}
-                  className="border border-gray-300 rounded-md"
-                />
-              )}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Services
+          </label>
+          <div className="flex">
+            <input
+              type="text"
+              value={newService}
+              onChange={(e) => setNewService(e.target.value)}
+              className="flex-grow p-2 border border-gray-300 rounded-l focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Add a service"
             />
-            {errors.fullDescription && (
-              <p className="text-red-500 text-xs mt-1">{errors.fullDescription.message}</p>
-            )}
-          </div>
-
-          {/* Gallery Images (Array) */}
-          <div className="mb-4">
-            <label className="text-sm font-medium text-gray-700 mb-1 flex items-center">
-              <FileText className="mr-2 text-gray-500" size={16} />
-              Gallery Images {isEditMode && previewImages.some(img => img.existing) && "(Current images shown below)"}
-            </label>
-            <input 
-              type="file"
-              multiple
-              accept="image/*"
-              onChange={handleGalleryImagesUpload}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm file:mr-2 file:px-2 file:py-1 file:text-xs file:bg-gray-100 file:border-0 file:rounded"
-            />
-            
-            {previewImages.length > 0 && (
-              <div className="mt-2 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
-                {previewImages.map((img, index) => (
-                  <div key={index} className="relative group">
-                    <img 
-                      src={img.preview} 
-                      alt={`Gallery Image ${index + 1}`} 
-                      className="h-24 w-full object-cover rounded-md"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => removeGalleryImage(index)}
-                      className="absolute top-1 right-1 bg-red-500 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
-                    >
-                      <X size={12} />
-                    </button>
-                    {img.existing && (
-                      <span className="absolute bottom-1 right-1 bg-blue-500 text-white text-xs px-1 py-0.5 rounded">
-                        Current
-                      </span>
-                    )}
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Submit Button */}
-          <div className="mt-6">
             <button
-              type="submit"
-              disabled={isLoading}
-              className={`w-full ${
-                isLoading ? 'bg-blue-300' : 'bg-blue-500 hover:bg-blue-600'
-              } text-white py-2 rounded-md text-sm transition-colors`}
+              type="button"
+              onClick={addService}
+              className="bg-blue-500 text-white px-4 py-2 rounded-r hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
-              {isLoading 
-                ? isEditMode ? 'Updating Project...' : 'Creating Project...' 
-                : isEditMode ? 'Update Project' : 'Create Project'
-              }
+              Add
             </button>
           </div>
-        </form>
-      </div>
+
+          {formData.services.length > 0 && (
+            <div className="mt-2 flex flex-wrap gap-2">
+              {formData.services.map((service, index) => (
+                <span
+                  key={index}
+                  className="bg-blue-100 text-blue-800 px-2 py-1 rounded flex items-center text-sm"
+                >
+                  {service}
+                  <button
+                    type="button"
+                    onClick={() => removeService(index)}
+                    className="ml-1 text-blue-500 hover:text-blue-700 focus:outline-none"
+                  >
+                    ×
+                  </button>
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Detailed Description 
+          </label>
+          <Editor
+            value={formData.description }
+            onTextChange={(e) => handleEditorChange(e.htmlValue)}
+            style={{ height: "320px" }}
+          />
+        </div>
+
+        <div>
+          <button
+            type="submit"
+            disabled={loading}
+            className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-blue-300"
+          >
+            {loading ? "Creating..." : "Create Project"}
+          </button>
+        </div>
+      </form>
     </div>
   );
-};
+}
 
 export default CreateProject;

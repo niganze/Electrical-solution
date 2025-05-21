@@ -203,7 +203,7 @@ const MEPCostEstimator = () => {
           <div className="px-6 py-4 border-b border-gray-200">
             <div className="flex justify-between items-center">
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">MEP Cost Calculator Admin</h1>
+                <h1 className="text-xl font-semibold text-gray-900">MEP Cost Calculator </h1>
                 <p className="text-gray-600 mt-1">Manage pricing, multipliers, and configuration settings</p>
               </div>
               <div className="flex items-center space-x-3">

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Plus, Edit, Trash2, Search, Upload, X, Save, CheckCircle, MapPin, Calendar, Building, ListChecks } from 'lucide-react';
+import { useNavigate } from "react-router-dom";
+import { Plus, Edit, Trash2, Search, MapPin, Calendar, Building,} from 'lucide-react';
 import PROJECT from '../assets/images/kabeza.jpeg';
 const Project = () => {
   // Sample initial data
@@ -48,6 +49,7 @@ const Project = () => {
     }
   ]);
 
+   const navigate = useNavigate();
   
   const [searchTerm, setSearchTerm] = useState('');
   
@@ -102,9 +104,9 @@ const Project = () => {
                 <p className="text-gray-600 mt-1">Manage your company's projects and their details</p>
               </div>
               <button
-                onClick={openCreateModal}
-                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-              >
+            onClick={() => navigate("/dashboard/createproject")}
+            className="flex items-center bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-md"
+          >
                 <Plus className="h-4 w-4 mr-2" />
                 Add Project
               </button>

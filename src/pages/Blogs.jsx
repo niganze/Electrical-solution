@@ -1,108 +1,143 @@
-import React, { useState } from 'react';
-import { Search, Calendar, User, Clock, ChevronRight, ThumbsUp, MessageSquare, Share2 } from 'lucide-react';
-import blog1 from '../assets/images/blog1.jpg';
-import ai from '../assets/images/ai.jpeg';
+import { useState } from "react";
+import {
+  Search,
+  Calendar,
+  User,
+  Clock,
+  Share2,
+} from "lucide-react";
+import blog1 from "../assets/images/blog1.jpg";
+import ai from "../assets/images/ai.jpeg";
 
 export default function Blogs() {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [activeCategory, setActiveCategory] = useState('All');
-  
+  const [searchTerm, setSearchTerm] = useState("");
+  const [activeCategory, setActiveCategory] = useState("All");
+
   // Sample blog data
   const blogs = [
     {
       id: 1,
-      title: 'Getting Started with React in 2025',
-      excerpt: 'Learn how to build modern applications with React and the latest tools in the ecosystem.',
-      author: 'Sarah Johnson',
-      date: 'May 10, 2025',
-      readTime: '5 min read',
-      category: 'Development',
-      
+      title: "Getting Started with React in 2025",
+      excerpt:
+        "Learn how to build modern applications with React and the latest tools in the ecosystem.",
+      author: "Sarah Johnson",
+      date: "May 10, 2025",
+      readTime: "5 min read",
+      category: "Development",
       image: ai,
     },
     {
       id: 2,
-      title: 'The Future of Web Development',
-      excerpt: 'Exploring upcoming trends in web development and how they will shape the industry.',
-      author: 'Michael Chen',
-      date: 'May 7, 2025',
-      readTime: '8 min read',
-      category: 'Technology',
-    
+      title: "The Future of Web Development",
+      excerpt:
+        "Exploring upcoming trends in web development and how they will shape the industry.",
+      author: "Michael Chen",
+      date: "May 7, 2025",
+      readTime: "8 min read",
+      category: "Technology",
       image: blog1,
     },
     {
       id: 3,
-      title: 'Designing for Accessibility',
-      excerpt: 'Best practices for creating inclusive web experiences that everyone can use.',
-      author: 'Alex Rodriguez',
-      date: 'May 3, 2025',
-      readTime: '6 min read',
-      category: 'Design',
+      title: "Designing for Accessibility",
+      excerpt:
+        "Best practices for creating inclusive web experiences that everyone can use.",
+      author: "Alex Rodriguez",
+      date: "May 3, 2025",
+      readTime: "6 min read",
+      category: "Design",
       image: blog1,
     },
     {
       id: 4,
-      title: 'Building Scalable APIs with Node.js',
-      excerpt: 'Learn best practices for creating robust and scalable backend services.',
-      author: 'David Wilson',
-      date: 'April 28, 2025',
-      readTime: '7 min read',
-      category: 'Development',
-      
+      title: "Building Scalable APIs with Node.js",
+      excerpt:
+        "Learn best practices for creating robust and scalable backend services.",
+      author: "David Wilson",
+      date: "April 28, 2025",
+      readTime: "7 min read",
+      category: "Development",
       image: ai,
     },
     {
       id: 5,
-      title: 'Digital Marketing Strategies for 2025',
-      excerpt: 'Effective marketing strategies to grow your business in the digital age.',
-      author: 'Emma Thompson',
-      date: 'April 25, 2025',
-      readTime: '6 min read',
-      category: 'Business',
-     
+      title: "Digital Marketing Strategies for 2025",
+      excerpt:
+        "Effective marketing strategies to grow your business in the digital age.",
+      author: "Emma Thompson",
+      date: "April 25, 2025",
+      readTime: "6 min read",
+      category: "Business",
       image: blog1,
     },
     {
       id: 6,
-      title: 'Work-Life Balance in Tech',
-      excerpt: 'Tips for maintaining a healthy balance between work and personal life in the tech industry.',
-      author: 'James Brown',
-      date: 'April 20, 2025',
-      readTime: '5 min read',
-      category: 'Lifestyle',
-      
+      title: "Work-Life Balance in Tech",
+      excerpt:
+        "Tips for maintaining a healthy balance between work and personal life in the tech industry.",
+      author: "James Brown",
+      date: "April 20, 2025",
+      readTime: "5 min read",
+      category: "Lifestyle",
       image: ai,
     },
   ];
-  
+
   // Categories for sidebar with proper counts
   const categories = [
-    { name: 'All', count: blogs.length },
-    { name: 'Development', count: blogs.filter(blog => blog.category === 'Development').length },
-    { name: 'Design', count: blogs.filter(blog => blog.category === 'Design').length },
-    { name: 'Technology', count: blogs.filter(blog => blog.category === 'Technology').length },
-    { name: 'Business', count: blogs.filter(blog => blog.category === 'Business').length },
-    { name: 'Lifestyle', count: blogs.filter(blog => blog.category === 'Lifestyle').length },
+    { name: "All", count: blogs.length },
+    {
+      name: "Development",
+      count: blogs.filter((blog) => blog.category === "Development").length,
+    },
+    {
+      name: "Design",
+      count: blogs.filter((blog) => blog.category === "Design").length,
+    },
+    {
+      name: "Technology",
+      count: blogs.filter((blog) => blog.category === "Technology").length,
+    },
+    {
+      name: "Business",
+      count: blogs.filter((blog) => blog.category === "Business").length,
+    },
+    {
+      name: "Lifestyle",
+      count: blogs.filter((blog) => blog.category === "Lifestyle").length,
+    },
   ];
-  
+
   // Filter blogs based on search term and active category
-  const filteredBlogs = blogs.filter(blog => {
-    const matchesSearch = 
+  const filteredBlogs = blogs.filter((blog) => {
+    const matchesSearch =
       blog.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       blog.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
       blog.category.toLowerCase().includes(searchTerm.toLowerCase());
-    
-    const matchesCategory = activeCategory === 'All' || blog.category === activeCategory;
-    
+
+    const matchesCategory =
+      activeCategory === "All" || blog.category === activeCategory;
+
     return matchesSearch && matchesCategory;
   });
-  
+
   // Handle category selection
   const handleCategoryChange = (category) => {
     setActiveCategory(category);
   };
-  
+
+  // Function to handle category click without triggering the blog card navigation
+  const handleCategoryClick = (e, category) => {
+    e.stopPropagation(); // Stop event propagation
+    setActiveCategory(category);
+  };
+
+  // Function to handle share button click without triggering the blog card navigation
+  const handleShareClick = (e) => {
+    e.stopPropagation(); // Stop event propagation
+    // Add your share functionality here
+  };
+
   return (
     <div>
       {/* Hero Section - Reduced vertical spacing */}
@@ -111,7 +146,8 @@ export default function Blogs() {
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-xl font-bold py-12">Insights & Ideas</h1>
             <p className="text-sm text-blue-100 mb-8">
-              Discover the latest trends, innovations, and best practices in technology, design, and business from our expert team.
+              Discover the latest trends, innovations, and best practices in
+              technology, design, and business from our expert team.
             </p>
             <div className="relative">
               <input
@@ -127,8 +163,8 @@ export default function Blogs() {
             </div>
             <div className="flex flex-wrap gap-2 mt-4">
               {categories.slice(0, 5).map((category, index) => (
-                <button 
-                  key={index} 
+                <button
+                  key={index}
                   className="px-3 py-1 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full text-xs transition"
                   onClick={() => handleCategoryChange(category.name)}
                 >
@@ -150,20 +186,22 @@ export default function Blogs() {
               <ul>
                 {categories.map((category, index) => (
                   <li key={index} className="mb-1">
-                    <button 
+                    <button
                       className={`flex items-center justify-between w-full py-1 px-2 rounded-lg transition ${
-                        activeCategory === category.name 
-                          ? 'bg-blue-100 text-blue-700' 
-                          : 'hover:bg-gray-100 text-gray-700'
+                        activeCategory === category.name
+                          ? "bg-blue-100 text-blue-700"
+                          : "hover:bg-gray-100 text-gray-700"
                       }`}
                       onClick={() => handleCategoryChange(category.name)}
                     >
                       <span>{category.name}</span>
-                      <span className={`rounded-full text-xs py-0.5 px-2 ${
-                        activeCategory === category.name 
-                          ? 'bg-blue-600 text-white' 
-                          : 'bg-gray-200 text-gray-600'
-                      }`}>
+                      <span
+                        className={`rounded-full text-xs py-0.5 px-2 ${
+                          activeCategory === category.name
+                            ? "bg-blue-600 text-white"
+                            : "bg-gray-200 text-gray-600"
+                        }`}
+                      >
                         {category.count}
                       </span>
                     </button>
@@ -171,13 +209,18 @@ export default function Blogs() {
                 ))}
               </ul>
             </div>
-          
+
             <div className="bg-blue-50 rounded-xl p-4 sticky top-64">
-              <h3 className="text-sm font-semibold mb-2">Subscribe to Newsletter</h3>
-              <p className="text-gray-600 mb-3 text-xs">Get the latest articles and resources delivered straight to your inbox.</p>
-              <input 
-                type="email" 
-                placeholder="Your email address" 
+              <h3 className="text-sm font-semibold mb-2">
+                Subscribe to Newsletter
+              </h3>
+              <p className="text-gray-600 mb-3 text-xs">
+                Get the latest articles and resources delivered straight to your
+                inbox.
+              </p>
+              <input
+                type="email"
+                placeholder="Your email address"
                 className="w-full mb-2 rounded-lg border border-gray-300 py-1.5 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               <button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-1.5 px-3 text-sm rounded-lg transition">
@@ -185,18 +228,18 @@ export default function Blogs() {
               </button>
             </div>
           </div>
-        
+
           {/* Blog Posts - Reduced vertical spacing */}
           <div className="lg:w-3/4">
             {/* Active filters display */}
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center">
                 <h2 className="text-lg font-semibold text-gray-900 mr-3">
-                  {activeCategory === 'All' ? 'All Posts' : activeCategory}
+                  {activeCategory === "All" ? "All Posts" : activeCategory}
                 </h2>
-                {activeCategory !== 'All' && (
-                  <button 
-                    onClick={() => setActiveCategory('All')}
+                {activeCategory !== "All" && (
+                  <button
+                    onClick={() => setActiveCategory("All")}
                     className="text-xs text-blue-600 hover:text-blue-800 flex items-center"
                   >
                     Clear filter
@@ -204,26 +247,41 @@ export default function Blogs() {
                 )}
               </div>
               <div className="text-gray-500 text-xs">
-                Showing {filteredBlogs.length} {filteredBlogs.length === 1 ? 'post' : 'posts'}
+                Showing {filteredBlogs.length}{" "}
+                {filteredBlogs.length === 1 ? "post" : "posts"}
               </div>
             </div>
 
             {filteredBlogs.length > 0 ? (
               <div className="grid md:grid-cols-2 gap-6">
                 {filteredBlogs.map((blog) => (
-                  <div key={blog.id} className="bg-white rounded-xl overflow-hidden shadow hover:shadow-md transition">
-                    <img src={blog.image} alt={blog.title} className="w-full h-40 object-cover" />
+                  <a
+                    key={blog.id}
+                    href={`/blog/${blog.id}`}
+                    className="block bg-white rounded-xl overflow-hidden shadow hover:shadow-md transition"
+                  >
+                    <div className="relative">
+                      <img
+                        src={blog.image}
+                        alt={blog.title}
+                        className="w-full h-40 object-cover"
+                      />
+                    </div>
                     <div className="p-4">
                       <div className="flex items-center text-xs text-blue-600 mb-1">
-                        <button 
-                          onClick={() => setActiveCategory(blog.category)}
+                        <button
+                          onClick={(e) => handleCategoryClick(e, blog.category)}
                           className="hover:underline"
                         >
                           {blog.category}
                         </button>
                       </div>
-                      <h3 className="text-base font-bold mb-1.5 hover:text-blue-600 transition">{blog.title}</h3>
-                      <p className="text-sm text-gray-600 mb-3">{blog.excerpt}</p>
+                      <h3 className="text-base font-bold mb-1.5 hover:text-blue-600 transition">
+                        {blog.title}
+                      </h3>
+                      <p className="text-sm text-gray-600 mb-3">
+                        {blog.excerpt}
+                      </p>
                       <div className="flex items-center text-xs text-gray-500 mb-3">
                         <User size={14} className="mr-1" />
                         <span className="mr-3">{blog.author}</span>
@@ -233,28 +291,24 @@ export default function Blogs() {
                         <span>{blog.readTime}</span>
                       </div>
                       <div className="flex items-center justify-between border-t pt-3">
-                        <div className="flex space-x-3">
-                          <button className="flex items-center text-xs text-gray-500 hover:text-blue-600">
-                            <Share2 size={14} />
-                          </button>
-                        </div>
-                        <a href={`/blog/${blog.id}`} className="flex items-center text-xs text-blue-600 hover:text-blue-800">
-                          <span className="mr-1">Read More</span>
-                          <ChevronRight size={14} />
-                        </a>
                       </div>
                     </div>
-                  </div>
+                  </a>
                 ))}
               </div>
             ) : (
               <div className="text-center py-10 bg-gray-50 rounded-xl">
-                <h3 className="text-base font-medium text-gray-900 mb-1">No articles found</h3>
-                <p className="text-sm text-gray-600">Try adjusting your search or filter to find what you're looking for.</p>
-                <button 
+                <h3 className="text-base font-medium text-gray-900 mb-1">
+                  No articles found
+                </h3>
+                <p className="text-sm text-gray-600">
+                  Try adjusting your search or filter to find what you're
+                  looking for.
+                </p>
+                <button
                   onClick={() => {
-                    setSearchTerm('');
-                    setActiveCategory('All');
+                    setSearchTerm("");
+                    setActiveCategory("All");
                   }}
                   className="mt-3 text-sm text-blue-600 hover:text-blue-800"
                 >
@@ -262,7 +316,7 @@ export default function Blogs() {
                 </button>
               </div>
             )}
-          
+
             {/* Pagination - Reduced size */}
             {filteredBlogs.length > 0 && (
               <div className="mt-8 flex justify-center">
